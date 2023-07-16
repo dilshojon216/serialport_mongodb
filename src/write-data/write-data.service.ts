@@ -117,7 +117,7 @@ export class WriteDataService {
                                                                       $avg: "$secondAgGeneratorFlow",
                                                             },
                                                             date: {
-                                                                      $first: "$date",
+                                                                      $last: "$date",
                                                             },
                                                   },
                                         },
