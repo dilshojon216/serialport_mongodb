@@ -13,4 +13,8 @@ export class DailyDataService {
           async allCreate(dailyData: DailyData[]): Promise<DailyData[]> {
                     return await this.dailyDataModel.insertMany(dailyData);
           }
+
+          async update(id: string, dailyData: DailyData) {
+                    return await this.dailyDataModel.updateOne({ _id: id }, dailyData);
+          }
 }

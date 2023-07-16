@@ -9,6 +9,7 @@ import { HourlyData, HourlyDataSchema } from './schemas/hourly.data.schema';
     MongooseModule.forFeature([{ name: HourlyData.name, schema: HourlyDataSchema, }])
   ],
   controllers: [HourlyDataController],
-  providers: [HourlyDataService]
+  providers: [HourlyDataService],
+  exports: [HourlyDataService]
 })
 export class HourlyDataModule { }

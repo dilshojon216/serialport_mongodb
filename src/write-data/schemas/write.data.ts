@@ -100,6 +100,9 @@ export class WriteData {
 
           @Prop({ required: true })
           secondAgGeneratorFlow: number;
+
+          @Prop({ required: true })
+          date: Date;
 }
 
 export const WriteDataSchema = SchemaFactory.createForClass(WriteData);

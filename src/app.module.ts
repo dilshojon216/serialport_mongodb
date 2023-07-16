@@ -11,14 +11,16 @@ import { ReadSeralModule } from './read-seral/read-seral.module';
 import { WriteDataModule } from './write-data/write-data.module';
 import { MonthlyDataModule } from './monthly-data/monthly-data.module';
 import { YearlyDataModule } from './yearly-data/yearly-data.module';
-import { YesterdayModule } from './yesterday/yesterday.module';
 import { YesterdayDataModule } from './yesterday-data/yesterday-data.module';
+import { DailyCronsTask } from './services/daily.crons.task';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
     }),
+    ScheduleModule.forRoot(),
 
     MongooseModule.forRootAsync({
       inject: [ConfigService],
@@ -28,8 +30,8 @@ import { YesterdayDataModule } from './yesterday-data/yesterday-data.module';
 
       }),
     }),
-    LastDataModule, HourlyDataModule, DailyDataModule, ReadSeralModule, WriteDataModule, MonthlyDataModule, YearlyDataModule, YesterdayModule, YesterdayDataModule],
+    LastDataModule, HourlyDataModule, DailyDataModule, ReadSeralModule, WriteDataModule, MonthlyDataModule, YearlyDataModule, YesterdayDataModule],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, DailyCronsTask],
 })
 export class AppModule { }

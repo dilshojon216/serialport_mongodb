@@ -1,11 +1,10 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { Document, Types, SchemaTypes } from 'mongoose';
 import mongoose from 'mongoose';
 
-export type LastDataDocument = LastData & Document;
+export type YesterdayDataDocument = YesterdayData & Document;
 
-@Schema({ timestamps: true, versionKey: false, collection: 'lastData' })
-export class LastData {
+@Schema({ timestamps: true, versionKey: false, collection: 'hourlyData' })
+export class YesterdayData {
           _id?: mongoose.Types.ObjectId;
           @Prop({ required: true })
           fistAgVoltage: number;
@@ -100,9 +99,6 @@ export class LastData {
 
           @Prop({ required: true })
           secondAgGeneratorFlow: number;
-
-          @Prop({ required: true })
-          date: Date;
 }
 
-export const LastDataSchema = SchemaFactory.createForClass(LastData);
+export const YesterdayDataSchema = SchemaFactory.createForClass(YesterdayData);

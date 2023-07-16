@@ -1,5 +1,4 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
-import { Document, Types, SchemaTypes } from 'mongoose';
 import mongoose from 'mongoose';
 
 export type HourlyDataDocument = HourlyData & Document;
@@ -100,6 +99,10 @@ export class HourlyData {
 
           @Prop({ required: true })
           secondAgGeneratorFlow: number;
+
+          @Prop({ required: true })
+          date: Date;
+
 }
 
 export const HourlyDataSchema = SchemaFactory.createForClass(HourlyData);
