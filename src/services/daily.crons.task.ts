@@ -9,13 +9,7 @@ export class DailyCronsTask {
           constructor(private readonly writeDataService: WriteDataService, private readonly hourlyDataService: HourlyDataService, private readonly lastDataService: LastDataService) { }
 
 
-          @Cron('00 00 * * * *')
-          async handleCron() {
-                    const writeDataByHour = await this.writeDataService.getDataByHour()
-                    await this.hourlyDataService.allCrate(writeDataByHour)
-                    console.log('hourly data created')
-                    await this.writeDataService.deleteAllData();
-          }
+
 
 
           @Cron(CronExpression.EVERY_30_SECONDS)
@@ -66,6 +60,14 @@ export class DailyCronsTask {
                               await this.writeDataService.create(lastDataS)
 
                     }
+          }
+
+          @Cron('00 00 * * * *')
+          async handleCron() {
+                    const writeDataByHour = await this.writeDataService.getDataByHour()
+                    await this.hourlyDataService.allCrate(writeDataByHour)
+                    console.log('hourly data created')
+                    await this.writeDataService.deleteAllData();
           }
 
 

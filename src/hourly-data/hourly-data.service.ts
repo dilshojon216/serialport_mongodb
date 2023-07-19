@@ -18,7 +18,7 @@ export class HourlyDataService {
 
                     const end = new Date(Date.UTC(start.getFullYear(), start.getMonth(), start.getDate(), 23, 59, 59, 999));
 
-                    return await this.hourlyDataModel.find({ date: { $gte: start, $lt: end } }).sort({ createdAt: -1 });
+                    return await this.hourlyDataModel.find({ date: { $gte: start, $lt: end } }).sort({ date: -1 });
 
           }
 
@@ -180,6 +180,10 @@ export class HourlyDataService {
                                                   '$project': {
                                                             'monthNumber': 0
                                                   }
+                                        }, {
+                                                  '$sort': {
+                                                            'day': -1
+                                                  }
                                         }
                               ]
                     )
@@ -336,7 +340,11 @@ export class HourlyDataService {
                                                             'secondAgGeneratorActivePower': '$secondAgGeneratorActivePower',
                                                             'secondAgGeneratorReactivePower': '$secondAgGeneratorReactivePower',
                                                             'secondAgGeneratorFlow': '$secondAgGeneratorFlow',
-                                                            'day': '$day'
+                                                            'day': {
+                                                                      '$substr': [
+                                                                                '$_id', 5, 7
+                                                                      ]
+                                                            }
                                                   }
                                         }, {
                                                   '$match': {
